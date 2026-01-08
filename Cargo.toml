@@ -14,7 +14,7 @@ keywords = ["lance", "hdfs", "object-store", "lance-db"]
 async-trait = "0.1"
 url = "2"
 snafu = "0.8"
-object_store = { version = "0.12", default-features = false }
+object_store = { version = "0.13", default-features = false }
 opendal = { version = "0.55", features = ["services-hdfs-native"] }
 object_store_opendal = "0.55"
 
