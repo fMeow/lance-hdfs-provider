@@ -9,6 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v3
 
       - name: rustfmt
         run: cargo fmt --all -- --check
@@ -36,14 +38,25 @@ jobs:
           RUSTDOCFLAGS: -Dwarnings
         run: cargo doc --all --no-deps
 
+  semver-checks:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Check semver
+        uses: obi1kenobi/cargo-semver-checks-action@v2
+
   publish:
     name: Publish Package
-    needs: [build_and_test, doc]
+    needs: [build_and_test, doc, semver-checks]
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+
       - uses: dtolnay/rust-toolchain@stable
+      - uses: arduino/setup-protoc@v3
       - name: login
         env:
           SUPER_SECRET: ${{ secrets.CARGO_TOKEN }}
