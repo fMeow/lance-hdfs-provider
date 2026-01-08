@@ -17,7 +17,7 @@ use lance_io::object_store::{
 /// # Example
 ///
 /// ## With lance
-/// ```rust
+/// ```rust,no_run
 /// # use std::sync::Arc;
 /// # use lance::{io::ObjectStoreRegistry, session::Session,
 /// #     dataset::{DEFAULT_INDEX_CACHE_SIZE, DEFAULT_METADATA_CACHE_SIZE}}
@@ -42,7 +42,7 @@ use lance_io::object_store::{
 /// # }
 /// ```
 /// ## With lancedb
-/// ```rust
+/// ```rust,no_run
 /// # use std::sync::Arc;
 /// # use lance::{io::ObjectStoreRegistry, session::Session,
 /// #     dataset::{DEFAULT_INDEX_CACHE_SIZE, DEFAULT_METADATA_CACHE_SIZE}

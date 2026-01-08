@@ -15,7 +15,7 @@ lance-hdfs-provider = "0.1.0"
 
 Register the provider, then read or write using HDFS URIs:
 
-```rust
+```rust,no_run
 use std::sync::Arc;
 use lance::{io::ObjectStoreRegistry, session::Session,
     dataset::{DEFAULT_INDEX_CACHE_SIZE, DEFAULT_METADATA_CACHE_SIZE}
@@ -51,7 +51,7 @@ use lance_hdfs_provider::HdfsStoreProvider;
 
 Use the same registry when creating the LanceDB session:
 
-```rust
+```rust,no_run
 use std::sync::Arc;
 use lance::{io::ObjectStoreRegistry, session::Session,
     dataset::{DEFAULT_INDEX_CACHE_SIZE, DEFAULT_METADATA_CACHE_SIZE}
