@@ -20,6 +20,7 @@ use std::sync::Arc;
 use lance::{io::ObjectStoreRegistry, session::Session,
     dataset::{DEFAULT_INDEX_CACHE_SIZE, DEFAULT_METADATA_CACHE_SIZE}
 };
+use lance::dataset::builder::DatasetBuilder;
 use lance_hdfs_provider::HdfsStoreProvider;
 
 # #[tokio::main(flavor = "current_thread")]

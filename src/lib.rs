@@ -23,6 +23,7 @@ use lance_io::object_store::{
 /// #     dataset::{DEFAULT_INDEX_CACHE_SIZE, DEFAULT_METADATA_CACHE_SIZE}}
 /// # ;
 /// # use lance_hdfs_provider::HdfsStoreProvider;
+/// # use lance::dataset::builder::DatasetBuilder;
 ///
 /// # #[tokio::main(flavor = "current_thread")]
 /// # async fn main() -> Result<(), Box<dyn std::error::Error>> {
