@@ -1,0 +1,31 @@
+[package]
+name = "lance-hdfs-provider"
+version = "0.1.0"
+edition = "2024"
+authors = ["Guoli Lyu <guoli-lv@hotmail.com>"]
+readme = "README.md"
+license = "MIT"
+description = "HDFS store provider for lance"
+repository = "https://github.com/fMeow/lance-hdfs-provider"
+documentation = "https://docs.rs/lance-hdfs-provider"
+keywords = ["lance", "hdfs", "object-store", "lance-db"]
+
+[dependencies]
+async-trait = "0.1"
+url = "2"
+snafu = "0.8"
+object_store = { version = "0.12", default-features = false }
+opendal = { version = "0.55", features = ["services-hdfs-native"] }
+object_store_opendal = "0.55"
+
+lance = { version = "1", default-features = false }
+lance-core = { version = "1", default-features = false }
+lance-io = { version = "1", default-features = false }
+
+[dev-dependencies]
+arrow = "56"
+tokio = { version = "1", features = ["full"] }
+lancedb = { version = "0.23", default-features = false }
+futures = "0.3"
+hdfs-native = { version = "0.13", features = ["integration-test"] }
+serial_test = "3.0"
