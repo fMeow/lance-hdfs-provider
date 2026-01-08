@@ -9,8 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v3
+      - uses: arduino/setup-protoc@v3
 
       - name: rustfmt
         run: cargo fmt --all -- --check
@@ -32,6 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
+      - uses: arduino/setup-protoc@v3
 
       - name: doc
         env:
