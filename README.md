@@ -81,9 +81,14 @@ use lance_hdfs_provider::HdfsStoreProvider;
 
 ## Notes
 
-- Ensure your HDFS URI includes the NameNode host and port (e.g. `hdfs://127.0.0.1:9000/path`).
+- Ensure your HDFS URI includes the NameNode. It can be a server with host and port (e.g. `hdfs://127.0.0.1:9000/path`), or a named cluster.
 - Authentication and additional options can be passed via Lance `StorageOptions`; any key supported by OpenDAL's HDFS service can be provided.
 
-## License
+## Licenses
 
-MIT
+Licensed under either of
+
+- Apache License, Version 2.0
+  ([LICENSE-APACHE](LICENSE-APACHE) or <http://www.apache.org/licenses/LICENSE-2.0>)
+- MIT license
+  ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
