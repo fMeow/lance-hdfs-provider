@@ -80,7 +80,7 @@ impl ObjectStoreProvider for HdfsStoreProvider {
         params: &ObjectStoreParams,
     ) -> Result<ObjectStore, lance_core::Error> {
         let mut storage_options =
-            StorageOptions(params.storage_options.clone().unwrap_or_default());
+            StorageOptions(params.storage_options().cloned().unwrap_or_default());
 
         let download_retry_count = storage_options.download_retry_count();
         storage_options.0.insert(
@@ -107,7 +107,7 @@ impl ObjectStoreProvider for HdfsStoreProvider {
             true,
             DEFAULT_CLOUD_IO_PARALLELISM,
             download_retry_count,
-            params.storage_options.as_ref(),
+            params.storage_options(),
         ))
     }
 
