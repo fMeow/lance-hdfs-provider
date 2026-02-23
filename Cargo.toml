@@ -28,4 +28,4 @@ tokio = { version = "1", features = ["full"] }
 lancedb = { version = "0.26", default-features = false }
 futures = "0.3"
 hdfs-native = { version = "0.13", features = ["integration-test"] }
-serial_test = "3.0"
+serial_test = "3.4"
