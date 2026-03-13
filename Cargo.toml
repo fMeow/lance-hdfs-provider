@@ -20,7 +20,7 @@ object_store_opendal = "0.55"
 
 lance = { version = "2", default-features = false }
 lance-core = { version = "2", default-features = false }
-lance-io = { version = "2", default-features = false }
+lance-io = { version = "3", default-features = false }
 
 [dev-dependencies]
 arrow = "57"
