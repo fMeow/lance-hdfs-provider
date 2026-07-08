@@ -29,17 +29,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         DEFAULT_METADATA_CACHE_SIZE,
         Arc::new(registry),
     ));
-    write_dataset(
-        session.clone(),
-        "hdfs://hdfs://127.0.0.1:9000/sample-dataset",
-    )
-    .await?;
+    write_dataset(session.clone(), "hdfs://127.0.0.1:9000/sample-dataset").await?;
 
-    let _record_batchs = read_dataset(
-        session.clone(),
-        "hdfs://hdfs://127.0.0.1:9000/sample-dataset",
-    )
-    .await?;
+    let _record_batchs =
+        read_dataset(session.clone(), "hdfs://127.0.0.1:9000/sample-dataset").await?;
 
     Ok(())
 }

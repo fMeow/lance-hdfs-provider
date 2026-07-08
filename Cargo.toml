@@ -14,9 +14,12 @@ keywords = ["lance", "hdfs", "object-store", "lance-db"]
 async-trait = "0.1"
 url = "2"
 snafu = "0.8"
+bytes = "1"
+futures = "0.3"
 object_store = { version = "0.12", default-features = false }
-opendal = { version = "0.55", features = ["services-hdfs-native"] }
+opendal = { version = "0.55", features = ["services-hdfs"] }
 object_store_opendal = "0.55"
+send_wrapper = { version = "0.6", features = ["futures"] }
 
 lance = { version = "2", default-features = false }
 lance-core = { version = "2", default-features = false }
@@ -26,6 +29,3 @@ lance-io = { version = "2", default-features = false }
 arrow = "57"
 tokio = { version = "1", features = ["full"] }
 lancedb = { version = "0.26", default-features = false }
-futures = "0.3"
-hdfs-native = { version = "0.13", features = ["integration-test"] }
-serial_test = "3.0"
