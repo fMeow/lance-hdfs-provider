@@ -14,18 +14,27 @@ keywords = ["lance", "hdfs", "object-store", "lance-db"]
 async-trait = "0.1"
 url = "2"
 snafu = "0.8"
-object_store = { version = "0.12", default-features = false }
-opendal = { version = "0.55", features = ["services-hdfs-native"] }
-object_store_opendal = "0.55"
+bytes = "1"
+futures = "0.3"
+uuid = { version = "1", features = ["v4"] }
+object_store = "0.12"
+opendal = "0.58"
+object_store_opendal = "0.58"
 
 lance = { version = "2", default-features = false }
 lance-core = { version = "2", default-features = false }
 lance-io = { version = "2", default-features = false }
+lance-table = { version = "2", default-features = false }
 
 [dev-dependencies]
 arrow = "57"
 tokio = { version = "1", features = ["full"] }
 lancedb = { version = "0.26", default-features = false }
-futures = "0.3"
-hdfs-native = { version = "0.13", features = ["integration-test"] }
-serial_test = "3.0"
+
+# Use opendal, object_store_opendal, and hdrs from GitHub main branches
+# which contain the needed API semantics. Update these to published versions
+# once they are released.
+[patch.crates-io]
+opendal = { git = "https://github.com/apache/opendal", branch = "main" }
+object_store_opendal = { git = "https://github.com/apache/opendal", branch = "main" }
+hdrs = { git = "https://github.com/Xuanwo/hdrs", branch = "main" }

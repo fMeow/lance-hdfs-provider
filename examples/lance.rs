@@ -20,8 +20,7 @@ use lancedb::connection::LanceFileVersion;
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    use std::sync::Arc;
-    let registry = ObjectStoreRegistry::default();
+    let mut registry = ObjectStoreRegistry::default();
     registry.insert("hdfs", Arc::new(HdfsStoreProvider));
 
     let session = Arc::new(Session::new(
@@ -29,33 +28,23 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         DEFAULT_METADATA_CACHE_SIZE,
         Arc::new(registry),
     ));
-    write_dataset(
-        session.clone(),
-        "hdfs://hdfs://127.0.0.1:9000/sample-dataset",
-    )
-    .await?;
+    write_dataset(session.clone(), "hdfs://127.0.0.1:9000/sample-dataset").await?;
 
-    let _record_batchs = read_dataset(
-        session.clone(),
-        "hdfs://hdfs://127.0.0.1:9000/sample-dataset",
-    )
-    .await?;
+    let _record_batchs =
+        read_dataset(session.clone(), "hdfs://127.0.0.1:9000/sample-dataset").await?;
 
     Ok(())
 }
 
-// Writes sample dataset to the given path
 async fn write_dataset(
     session: Arc<Session>,
     data_path: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    // Define new schema
     let schema = Arc::new(Schema::new(vec![
         Field::new("key", DataType::UInt32, false),
         Field::new("value", DataType::UInt32, false),
     ]));
 
-    // Create new record batches
     let batch = RecordBatch::try_new(
         schema.clone(),
         vec![
@@ -66,7 +55,6 @@ async fn write_dataset(
 
     let batches = RecordBatchIterator::new([Ok(batch)], schema.clone());
 
-    // Define write parameters (e.g. overwrite dataset)
     let write_params = WriteParams {
         mode: WriteMode::Overwrite,
         session: Some(session),
@@ -80,7 +68,6 @@ async fn write_dataset(
     Ok(())
 }
 
-// Reads dataset from the given path and prints batch size, schema for all record batches. Also extracts and prints a slice from the first batch
 async fn read_dataset(
     session: Arc<Session>,
     data_path: &str,
