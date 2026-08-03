@@ -1,9 +1,12 @@
-//! Integration tests for the HDFS object store provider.
+// SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: Copyright The Lance Authors
+
+//! Integration tests for HDFS object store provider
 //!
 //! These tests need an existing HDFS cluster and are ignored by default.
 //!
 //! Set `HDFS_NAME_NODE` to the name node or nameservice address
-//! (for example, `hdfs://namenode:9000` or `hdfs://mycluster`) when it should
+//! (e.g., `hdfs://namenode:9000` or `hdfs://mycluster`) when it should
 //! override the authority in the test URI.
 //!
 //! Run:
@@ -16,9 +19,7 @@ use lance_hdfs_provider::HdfsStoreProvider;
 use lance_io::object_store::{
     ObjectStore, ObjectStoreParams, ObjectStoreRegistry, StorageOptionsAccessor,
 };
-use object_store::ObjectStore as _;
 use object_store::path::Path;
-use url::Url;
 
 fn name_node() -> String {
     std::env::var("HDFS_NAME_NODE").unwrap_or_else(|_| "hdfs://localhost:9000".to_string())
@@ -30,15 +31,6 @@ fn uri(path: &str) -> String {
         name_node().trim_end_matches('/'),
         path.trim_start_matches('/')
     )
-}
-
-async fn get_store(path: Url, params: &ObjectStoreParams) -> Arc<ObjectStore> {
-    let registry = Arc::new(ObjectStoreRegistry::default());
-    registry.insert("hdfs", Arc::new(HdfsStoreProvider));
-    let (store, _) = ObjectStore::from_uri_and_params(registry, path.as_str(), params)
-        .await
-        .unwrap();
-    store
 }
 
 #[ignore = "Requires HDFS cluster"]
@@ -85,7 +77,11 @@ async fn test_hdfs_store_with_custom_config() {
 #[tokio::test]
 async fn test_hdfs_basic_operations() {
     let params = ObjectStoreParams::default();
-    let store = get_store(uri("basic-operations").parse().unwrap(), &params).await;
+    let registry = Arc::new(ObjectStoreRegistry::default());
+    registry.insert("hdfs", Arc::new(HdfsStoreProvider));
+    let (store, _) = ObjectStore::from_uri_and_params(registry, &uri("basic-operations"), &params)
+        .await
+        .unwrap();
 
     let path = Path::from("test_file.txt");
     if store.inner.head(&path).await.is_ok() {
